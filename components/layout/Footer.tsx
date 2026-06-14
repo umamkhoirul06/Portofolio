@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { GitBranch, Linkedin, Mail, Server, Shield, Cpu } from "lucide-react";
+import { GitBranch, Link2, Mail, Server, Shield, Cpu } from "lucide-react";
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -44,7 +44,7 @@ export default function Footer() {
             <div className="flex gap-3">
               {[
                 { icon: GitBranch, href: "https://github.com/umamkhoirul06", label: "GitHub" },
-                { icon: Linkedin, href: "https://www.linkedin.com/in/khoerul-umam-78b02b408", label: "LinkedIn" },
+                { icon: Link2, href: "https://www.linkedin.com/in/khoerul-umam-78b02b408", label: "LinkedIn" },
                 { icon: Mail, href: "mailto:umamkhoerul163@gmail.com", label: "Email" },
               ].map(({ icon: Icon, href, label }) => (
                 <a
