@@ -1,26 +1,140 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --color-bg: #050505;
+    --color-surface: #0d0d0d;
+    --color-surface-2: #111827;
+    --color-border: rgba(0, 240, 255, 0.12);
+    --color-cyan: #00F0FF;
+    --color-blue: #0055FF;
+    --color-text: #f1f5f9;
+    --color-muted: #64748b;
+    --font-mono: 'JetBrains Mono', 'Fira Code', 'Courier New', monospace;
   }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  html {
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: #00F0FF22 transparent;
+  }
+
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: rgba(0, 240, 255, 0.25);
+    color: #fff;
+  }
+
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.2); border-radius: 99px; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Neon glow effects */
+  .glow-cyan {
+    box-shadow: 0 0 20px rgba(0,240,255,0.35), 0 0 60px rgba(0,240,255,0.12);
+  }
+  .glow-blue {
+    box-shadow: 0 0 20px rgba(0,85,255,0.35), 0 0 60px rgba(0,85,255,0.12);
+  }
+  .text-glow-cyan {
+    text-shadow: 0 0 20px rgba(0,240,255,0.6), 0 0 40px rgba(0,240,255,0.3);
+  }
+
+  /* Glassmorphism */
+  .glass {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+  .glass-cyan {
+    background: rgba(0, 240, 255, 0.05);
+    backdrop-filter: blur(16px) saturate(200%);
+    -webkit-backdrop-filter: blur(16px) saturate(200%);
+    border: 1px solid rgba(0,240,255,0.15);
+  }
+
+  /* Grid background */
+  .bg-grid {
+    background-image:
+      linear-gradient(rgba(0,240,255,0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,240,255,0.025) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  /* Dot pattern */
+  .bg-dots {
+    background-image: radial-gradient(rgba(0,240,255,0.12) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  /* Animated gradient border */
+  .border-glow {
+    position: relative;
+  }
+  .border-glow::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(0,240,255,0.4), transparent 50%, rgba(0,85,255,0.4));
+    z-index: -1;
+  }
+
+  /* Isometric transform */
+  .iso-card {
+    transform: rotateX(45deg) rotateZ(-45deg) scale(0.82);
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(0.23, 1, 0.32, 1);
+  }
+  .iso-card:hover {
+    transform: rotateX(0deg) rotateZ(0deg) scale(1) translateY(-8px);
+  }
+
+  /* Pulse animation for status indicator */
+  .pulse-green {
+    animation: pulseGreen 2s ease-in-out infinite;
+  }
+  @keyframes pulseGreen {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(34,197,94,0.7); }
+    50% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+  }
+
+  /* Circuit path glow */
+  .circuit-path {
+    stroke-dasharray: 300;
+    stroke-dashoffset: 300;
+    transition: stroke-dashoffset 0.8s ease;
+  }
+  .circuit-path.active {
+    stroke-dashoffset: 0;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    background: linear-gradient(135deg, #00F0FF 0%, #0055FF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Mono font */
+  .font-mono { font-family: var(--font-mono); }
+
+  /* Neon border */
+  .border-neon {
+    border: 1px solid rgba(0,240,255,0.2);
+    box-shadow: inset 0 0 20px rgba(0,240,255,0.03), 0 0 20px rgba(0,240,255,0.05);
+  }
 }
